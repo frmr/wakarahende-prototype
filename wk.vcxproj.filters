@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\wk\wkKanji.cpp">
+      <Filter>wk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wk\wkWakarahende.cpp">
+      <Filter>wk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wk\wkWord.cpp">
+      <Filter>wk</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="wk">
+      <UniqueIdentifier>{33a644f4-02a5-4633-bac0-46867f4f7401}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\wk\wkCsvFile.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wk\wkCsvLine.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wk\wkJlpt.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wk\wkKanji.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wk\wkKanjiChar.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wk\wkKanjiFile.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wk\wkKanjiFileField.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wk\wkNonKanjiChar.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wk\wkNonKanjiFile.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wk\wkNonKanjiFileField.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wk\wkValue.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wk\wkWakarahende.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wk\wkWord.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wk\wkWordFile.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wk\wkWordFileField.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
