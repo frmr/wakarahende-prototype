@@ -43,7 +43,7 @@ void wk::Wakarahende::buildKanjiMap()
 	{
 		for (const auto character : pair.first)
 		{
-			if (m_nonKanji.find(character) == m_nonKanji.end())
+			if (!m_nonKanji.Contains(character))
 			{
 				m_kanji.insert({ character, Kanji(character, m_words) });
 			}
@@ -57,7 +57,7 @@ void wk::Wakarahende::calculateKanjiFrequencies()
 	{
 		for (const auto character : pair.first)
 		{
-			if (m_nonKanji.find(character) == m_nonKanji.end())
+			if (!m_nonKanji.Contains(character))
 			{
 				m_kanji.at(character).incrementFrequency();
 			}
@@ -67,7 +67,7 @@ void wk::Wakarahende::calculateKanjiFrequencies()
 
 wk::KanjiChar wk::Wakarahende::calculateNextKanji() const
 {
-	std::set<std::wstring> unstartedWords;
+	wk::Set<std::wstring> unstartedWords;
 
 	for (const auto& pair : m_words)
 	{
@@ -79,28 +79,28 @@ wk::KanjiChar wk::Wakarahende::calculateNextKanji() const
 
 	Value               highestValue = 0;
 	KanjiChar           highestValueKanji = L'\0';
-	std::set<KanjiChar> checkedKanji;
+	wk::Set<KanjiChar>  checkedKanji;
 
 	for (const auto& word : unstartedWords)
 	{
 		const KanjiChar unstartedKanji = *(m_words.at(word).getKanjiNotInSet(m_startedKanji).begin());
 
-		Value                     totalValue = 0;
-		std::set<std::wstring>    checkedWords;
-		std::set<KanjiChar>       combinedKanji;
+		Value                 totalValue = 0;
+		wk::Set<std::wstring> checkedWords;
+		wk::Set<KanjiChar>    combinedKanji;
 	
 		combinedKanji.insert(m_startedKanji.begin(), m_startedKanji.end());
 		combinedKanji.insert(unstartedKanji);
 
-		if (checkedKanji.find(unstartedKanji) == checkedKanji.end())
+		if (!checkedKanji.Contains(unstartedKanji))
 		{
 			checkedKanji.insert(unstartedKanji);
 
-			const std::set<std::wstring> wordsUsingKanji = m_kanji.at(unstartedKanji).getWordsUsingKanji(combinedKanji);
+			const wk::Set<std::wstring> wordsUsingKanji = m_kanji.at(unstartedKanji).getWordsContainingAllKanji(combinedKanji);
 
 			for (const auto& wordUsingKanji : wordsUsingKanji)
 			{
-				if (checkedWords.find(wordUsingKanji) == checkedWords.end())
+				if (!checkedWords.Contains(wordUsingKanji))
 				{
 					checkedWords.insert(wordUsingKanji);
 					totalValue += m_words.at(wordUsingKanji).getValue();
@@ -120,20 +120,20 @@ wk::KanjiChar wk::Wakarahende::calculateNextKanji() const
 
 std::wstring wk::Wakarahende::calculateNextWord() const
 {
-	std::set<std::wstring> startedKanjiWords;
+	wk::Set<std::wstring> startedKanjiWords;
 
 	for (const auto& kanji : m_startedKanji)
 	{
-		const std::set<std::wstring> words = m_kanji.at(kanji).getWords();
+		const wk::Set<std::wstring> words = m_kanji.at(kanji).getWords();
 		startedKanjiWords.insert(words.begin(), words.end());
 	}
 
-	Value        highestValue = 0.0f;
+	Value        highestValue     = 0.0f;
 	std::wstring highestValueWord = L"";
 
 	for (const auto& word : startedKanjiWords)
 	{
-		if (m_startedWords.find(word) == m_startedWords.end() && m_words.at(word).getKanjiNotInSet(m_startedKanji).empty())
+		if (!m_startedWords.Contains(word) && m_words.at(word).getKanjiNotInSet(m_startedKanji).empty())
 		{
 			if (m_words.at(word).getValue() > highestValue)
 			{
@@ -188,7 +188,7 @@ void wk::Wakarahende::loadWords()
 	}
 }
 
-std::set<wk::NonKanjiChar> wk::Wakarahende::loadNonKanji()
+wk::Set<wk::NonKanjiChar> wk::Wakarahende::loadNonKanji()
 {
 	const std::vector<std::string> nonKanjiFilenames = {
 		"data/kana/hiragana.csv",
@@ -196,7 +196,7 @@ std::set<wk::NonKanjiChar> wk::Wakarahende::loadNonKanji()
 		"data/misc/misc.csv"
 	};
 
-	std::set<NonKanjiChar> nonKanji;
+	wk::Set<NonKanjiChar> nonKanji;
 
 	for (const auto& filename : nonKanjiFilenames)
 	{

@@ -1,6 +1,6 @@
 #include "wkWord.hpp"
 
-wk::Word::Word(const CsvLine<WordFileField>& csvLine, const Jlpt jlpt, const std::set<NonKanjiChar>& nonKanji, const std::map<KanjiChar, Kanji>& kanjiMap) :
+wk::Word::Word(const CsvLine<WordFileField>& csvLine, const Jlpt jlpt, const wk::Set<NonKanjiChar>& nonKanji, const std::map<KanjiChar, Kanji>& kanjiMap) :
 	m_word(csvLine.at(WordFileField::Word)),
 	m_hiragana(csvLine.at(WordFileField::Hiragana)),
 	m_meaning(csvLine.at(WordFileField::Meaning)),
@@ -23,21 +23,21 @@ void wk::Word::calculateValue()
 
 bool wk::Word::containsKanji(const KanjiChar kanji) const
 {
-	return m_wordKanji.find(kanji) != m_wordKanji.end();
+	return m_wordKanji.Contains(kanji);
 }
 
-std::set<wk::KanjiChar> wk::Word::getKanji() const
+wk::Set<wk::KanjiChar> wk::Word::getKanji() const
 {
 	return m_wordKanji;
 }
 
-std::set<wk::KanjiChar> wk::Word::getKanjiNotInSet(const std::set<KanjiChar>& kanjiSet) const
+wk::Set<wk::KanjiChar> wk::Word::getKanjiNotInSet(const wk::Set<KanjiChar>& kanjiSet) const
 {
-	std::set<KanjiChar> kanjiNotInSet;
+	wk::Set<KanjiChar> kanjiNotInSet;
 
 	for (const auto& kanji : m_wordKanji)
 	{
-		if (kanjiSet.find(kanji) == kanjiSet.end())
+		if (!kanjiSet.Contains(kanji))
 		{
 			kanjiNotInSet.insert(kanji);
 		}
@@ -51,13 +51,13 @@ wk::Value wk::Word::getValue() const
 	return m_value;
 }
 
-std::set<wk::KanjiChar> wk::Word::getKanjiFromWord(const std::wstring& word, const std::set<NonKanjiChar>& nonKanji)
+wk::Set<wk::KanjiChar> wk::Word::getKanjiFromWord(const std::wstring& word, const wk::Set<NonKanjiChar>& nonKanji)
 {
-	std::set<KanjiChar> wordKanji;
+	wk::Set<KanjiChar> wordKanji;
 
 	for (const auto& character : word)
 	{
-		if (nonKanji.find(character) == nonKanji.end())
+		if (!nonKanji.Contains(character))
 		{
 			wordKanji.insert(character);
 		}

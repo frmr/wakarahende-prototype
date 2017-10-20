@@ -11,6 +11,7 @@
 #include "wkValue.hpp"
 #include "wkWordFileField.hpp"
 #include "wkNonKanjiChar.hpp"
+#include "wkSet.hpp"
 
 namespace wk
 {
@@ -19,23 +20,23 @@ namespace wk
 	class Word
 	{
 	public:
-		Word(const CsvLine<WordFileField>& csvLine, const Jlpt jlpt, const std::set<NonKanjiChar>& nonKanji, const std::map<KanjiChar, Kanji>& kanjiMap);
+		Word(const CsvLine<WordFileField>& csvLine, const Jlpt jlpt, const wk::Set<NonKanjiChar>& nonKanji, const std::map<KanjiChar, Kanji>& kanjiMap);
 
-		void                       calculateValue();
-		bool                       containsKanji(const KanjiChar kanji) const;
-		std::set<KanjiChar>        getKanji() const;
-		std::set<KanjiChar>        getKanjiNotInSet(const std::set<KanjiChar>& kanjiSet) const;
-		Value                      getValue() const;
+		void                              calculateValue();
+		bool                              containsKanji(const KanjiChar kanji) const;
+		wk::Set<KanjiChar>                getKanji() const;
+		wk::Set<KanjiChar>                getKanjiNotInSet(const wk::Set<KanjiChar>& kanjiSet) const;
+		Value                             getValue() const;
 
 	private:
-		static std::set<KanjiChar> getKanjiFromWord(const std::wstring& word, const std::set<NonKanjiChar>& nonKanji);
+		static wk::Set<KanjiChar>         getKanjiFromWord(const std::wstring& word, const wk::Set<NonKanjiChar>& nonKanji);
 
 	private:
 		const std::wstring                m_word;
 		const std::wstring                m_hiragana;
 		const std::wstring                m_meaning;
 		const Jlpt                        m_jlpt;
-		const std::set<KanjiChar>         m_wordKanji;
+		const wk::Set<KanjiChar>          m_wordKanji;
 		const std::map<KanjiChar, Kanji>& m_kanjiMap;
 		Value                             m_value;
 	};

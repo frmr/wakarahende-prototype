@@ -35,6 +35,7 @@
     <ClInclude Include="src\wk\wkNonKanjiChar.hpp" />
     <ClInclude Include="src\wk\wkNonKanjiFile.hpp" />
     <ClInclude Include="src\wk\wkNonKanjiFileField.hpp" />
+    <ClInclude Include="src\wk\wkSet.hpp" />
     <ClInclude Include="src\wk\wkValue.hpp" />
     <ClInclude Include="src\wk\wkWakarahende.hpp" />
     <ClInclude Include="src\wk\wkWord.hpp" />

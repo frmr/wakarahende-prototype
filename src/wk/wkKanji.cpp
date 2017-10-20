@@ -24,14 +24,14 @@ int wk::Kanji::getFrequency() const
 	return m_frequency;
 }
 
-std::set<std::wstring> wk::Kanji::getWords() const
+wk::Set<std::wstring> wk::Kanji::getWords() const
 {
 	return m_words;
 }
 
-std::set<std::wstring> wk::Kanji::getWordsUsingKanji(const std::set<KanjiChar>& kanjiList) const
+wk::Set<std::wstring> wk::Kanji::getWordsContainingAllKanji(const wk::Set<KanjiChar>& kanjiList) const
 {
-	std::set<std::wstring> wordsUsingKanji;
+	wk::Set<std::wstring> wordsUsingKanji;
 
 	for (const auto& word : m_words)
 	{
@@ -49,9 +49,9 @@ void wk::Kanji::incrementFrequency()
 	++m_frequency;
 }
 
-std::set<std::wstring> wk::Kanji::getWordsContainingKanji(const KanjiChar kanji, const std::map<std::wstring, Word>& wordMap)
+wk::Set<std::wstring> wk::Kanji::getWordsContainingKanji(const KanjiChar kanji, const std::map<std::wstring, Word>& wordMap)
 {
-	std::set<std::wstring> words;
+	wk::Set<std::wstring> words;
 
 	for (const auto& pair : wordMap)
 	{

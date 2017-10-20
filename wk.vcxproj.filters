@@ -63,5 +63,8 @@
     <ClInclude Include="src\wk\wkWordFileField.hpp">
       <Filter>wk</Filter>
     </ClInclude>
+    <ClInclude Include="src\wk\wkSet.hpp">
+      <Filter>wk</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

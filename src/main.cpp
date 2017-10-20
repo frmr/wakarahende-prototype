@@ -1,5 +1,6 @@
 #include "wk/wkWakarahende.hpp"
 
+#include <cassert>
 #include <codecvt>
 #include <iostream>
 #include <locale>
@@ -17,9 +18,20 @@ int main()
 {
 	wk::Wakarahende app;
 
-	for (int i = 0; i < 500; ++i)
+	std::set<std::wstring> seen;
+
+	for (int i = 0; i < 5000; ++i)
 	{
 		const std::wstring next = app.next();
+
+		if (seen.find(next) != seen.end())
+		{
+			std::cout << "ERROR: ";
+			print(next);
+			return 1;
+		}
+
+		seen.insert(next);
 		print(next);
 	}
 

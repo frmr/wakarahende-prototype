@@ -9,6 +9,7 @@
 #include "wkNonKanjiChar.hpp"
 #include "wkWord.hpp"
 #include "wkKanji.hpp"
+#include "wkSet.hpp"
 
 namespace wk
 {
@@ -29,14 +30,14 @@ namespace wk
 		void                          calculateValues();
 		void                          loadWords();
 
-		static std::set<NonKanjiChar> loadNonKanji();
+		static wk::Set<NonKanjiChar>  loadNonKanji();
 
 	private:
-		const std::set<NonKanjiChar> m_nonKanji;
-		std::map<KanjiChar, Kanji>   m_kanji;
-		std::map<std::wstring, Word> m_words;
+		const wk::Set<NonKanjiChar>   m_nonKanji;
+		std::map<KanjiChar, Kanji>    m_kanji;
+		std::map<std::wstring, Word>  m_words;
 
-		std::set<KanjiChar>          m_startedKanji;
-		std::set<std::wstring>       m_startedWords;
+		wk::Set<KanjiChar>            m_startedKanji;
+		wk::Set<std::wstring>         m_startedWords;
 	};
 }
